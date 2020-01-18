@@ -1,6 +1,5 @@
-
 <!DOCTYPE html >
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -22,7 +21,7 @@
 
 <div role="navigation">
     <div class="navbar navbar-inverse">
-        <a href="/welcome" class="navbar-brand">Users</a>
+        <a href="/index" class="navbar-brand">Home</a>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/login">Login</a></li>
@@ -32,9 +31,69 @@
         </div>
     </div>
 </div>
+<c:choose>
 
+    <c:when test="${mode == 'ModeHome'}">
 
+        <div class="container" id="homediv">
+            <div class="jumbotron text-center">
+                <h1>Users</h1>
+                <h3>SpringBoot</h3>
+            </div>
+        </div>
 
+    </c:when>
+
+    <c:when test="${mode=='ModeRegister' }">
+        <div class="container text-center">
+            <h3>New Registration</h3>
+            <hr>
+            <form class="form-horizontal" method="POST" action="save_user">
+                <input type="hidden" name="id" value="${user.id }"/>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Username</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" name="username"
+                               value="${user.username }"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">First Name</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" name="firstname"
+                               value="${user.firstname }"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Last Name</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" name="lastname"
+                               value="${user.lastname }"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Age </label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="age"
+                               value="${user.age }"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Password</label>
+                    <div class="col-md-7">
+                        <input type="password" class="form-control" name="password"
+                               value="${user.password }"/>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <input type="submit" class="btn btn-primary" value="Register"/>
+                </div>
+            </form>
+        </div>
+    </c:when>
+
+</c:choose>
 <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</body></html>
+</body>
+</html>
