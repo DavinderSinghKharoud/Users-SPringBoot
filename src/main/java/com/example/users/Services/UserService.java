@@ -5,6 +5,8 @@ import com.example.users.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -16,7 +18,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void saveMyUser(User user){
-        userRepository.save( user );
+    public void saveMyUser(User user) {
+        userRepository.save(user);
+    }
+
+    public List<User> showAllUsers() {
+        List<User> users = new ArrayList<User>();
+
+        for (User user : userRepository.findAll()) {
+            users.add(user);
+        }
+        return users;
     }
 }

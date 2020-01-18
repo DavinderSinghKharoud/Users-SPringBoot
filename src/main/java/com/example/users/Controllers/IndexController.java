@@ -39,4 +39,12 @@ public class IndexController {
 
         return "index";
     }
+
+    @RequestMapping("/showUsers")
+    public String showUsers(HttpServletRequest request){
+
+        request.setAttribute("users", userService.showAllUsers());
+        request.setAttribute("mode", "AllUsers");
+        return "index";
+    }
 }
