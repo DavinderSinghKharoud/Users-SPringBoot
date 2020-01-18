@@ -57,4 +57,21 @@ public class IndexController {
         request.setAttribute("mode", "AllUsers");
         return "index";
     }
+
+    @RequestMapping("/editUser")
+    public String editUser(@RequestParam int id, HttpServletRequest request){
+
+        request.setAttribute("user", userService.getUserDetails(id));
+        request.setAttribute("mode","ModeUpdate");
+        return "index";
+    }
+
+    @RequestMapping("/login")
+    public String editUser(HttpServletRequest request){
+
+        request.setAttribute("mode","ModeLogin");
+        return "index";
+    }
+
+
 }
