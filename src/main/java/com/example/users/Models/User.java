@@ -5,8 +5,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -16,7 +18,7 @@ public class User {
     private String firstname;
     private String lastname;
     private int age;
-    private int password;
+    private String password;
 
     @Override
     public String toString() {
@@ -30,7 +32,7 @@ public class User {
                 '}';
     }
 
-    public User(String username, String firstname, String lastname, int age, int password) {
+    public User(String username, String firstname, String lastname, int age, String password) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -81,11 +83,11 @@ public class User {
         this.age = age;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }
