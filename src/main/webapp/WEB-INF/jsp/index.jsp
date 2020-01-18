@@ -58,7 +58,7 @@
                             <td>${user.firstname}</td>
                             <td>${user.lastname}</td>
                             <td>${user.age}</td>
-                            <td><a href="/delete-user?id=${user.id }"><span
+                            <td><a href="/deleteUser?id=${user.id }"><span
                                     class="glyphicon glyphicon-trash"></span></a></td>
                             <td><a href="/edit-user?id=${user.id }"><span
                                     class="glyphicon glyphicon-pencil"></span></a></td>

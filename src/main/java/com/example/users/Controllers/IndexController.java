@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,15 @@ public class IndexController {
     @RequestMapping("/showUsers")
     public String showUsers(HttpServletRequest request){
 
+        request.setAttribute("users", userService.showAllUsers());
+        request.setAttribute("mode", "AllUsers");
+        return "index";
+    }
+
+    @RequestMapping("/deleteUser")
+    public String deleteUser(@RequestParam int id, HttpServletRequest request){
+
+        userService.deleteMyUser( id );
         request.setAttribute("users", userService.showAllUsers());
         request.setAttribute("mode", "AllUsers");
         return "index";
