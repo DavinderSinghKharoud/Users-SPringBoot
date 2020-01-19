@@ -38,4 +38,9 @@ public class UserService {
     public User getUserDetails(int id){
         return userRepository.findById( id ).orElse(new User());
     }
+
+
+    public User findUserByUsernameAndPass( String username, String  password){
+     return userRepository.findUserByUsernameAndPassword(username, password);
+    }
 }

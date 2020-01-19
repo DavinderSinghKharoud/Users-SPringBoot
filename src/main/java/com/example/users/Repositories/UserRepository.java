@@ -4,4 +4,6 @@ import com.example.users.Models.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
+
+    public User findUserByUsernameAndPassword( String username, String  password);
 }

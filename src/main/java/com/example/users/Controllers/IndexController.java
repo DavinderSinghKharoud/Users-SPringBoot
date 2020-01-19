@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -19,30 +18,30 @@ public class IndexController {
     private UserService userService;
 
     @RequestMapping("/index")
-    public String Index(HttpServletRequest request){
+    public String Index(HttpServletRequest request) {
 
         request.setAttribute("mode", "ModeHome");
         return "index";
     }
 
     @RequestMapping("/register")
-    public String RegisterUser(HttpServletRequest request){
+    public String RegisterUser(HttpServletRequest request) {
 
         request.setAttribute("mode", "ModeRegister");
         return "index";
     }
 
     @RequestMapping("/save_user")
-    public String registerUser(@ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request){
+    public String registerUser(@ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
 
-        userService.saveMyUser( user );
-        request.setAttribute("mode","ModeHome");
+        userService.saveMyUser(user);
+        request.setAttribute("mode", "ModeHome");
 
         return "index";
     }
 
     @RequestMapping("/showUsers")
-    public String showUsers(HttpServletRequest request){
+    public String showUsers(HttpServletRequest request) {
 
         request.setAttribute("users", userService.showAllUsers());
         request.setAttribute("mode", "AllUsers");
@@ -50,28 +49,37 @@ public class IndexController {
     }
 
     @RequestMapping("/deleteUser")
-    public String deleteUser(@RequestParam int id, HttpServletRequest request){
+    public String deleteUser(@RequestParam int id, HttpServletRequest request) {
 
-        userService.deleteMyUser( id );
+        userService.deleteMyUser(id);
         request.setAttribute("users", userService.showAllUsers());
         request.setAttribute("mode", "AllUsers");
         return "index";
     }
 
     @RequestMapping("/editUser")
-    public String editUser(@RequestParam int id, HttpServletRequest request){
+    public String editUser(@RequestParam int id, HttpServletRequest request) {
 
         request.setAttribute("user", userService.getUserDetails(id));
-        request.setAttribute("mode","ModeUpdate");
+        request.setAttribute("mode", "ModeUpdate");
         return "index";
     }
 
     @RequestMapping("/login")
-    public String editUser(HttpServletRequest request){
+    public String editUser(HttpServletRequest request) {
 
-        request.setAttribute("mode","ModeLogin");
+        request.setAttribute("mode", "ModeLogin");
         return "index";
     }
 
-
+    @RequestMapping("/loginUser")
+    public String loginUser(@ModelAttribute User user, HttpServletRequest request) {
+        if (userService.findUserByUsernameAndPass(user.getUsername(), user.getPassword()) != null ) {
+            return "homepage";
+        } else {
+            request.setAttribute("error", "Invalid Username or Password");
+            request.setAttribute("mode", "ModeLogin");
+            return "index";
+        }
+    }
 }

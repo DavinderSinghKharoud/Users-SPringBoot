@@ -10,11 +10,11 @@
     <title>Users</title>
     <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
           rel="stylesheet">
-    <link href="static/css/style.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 
 </head>
 <body>
@@ -25,7 +25,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/login">Login</a></li>
-                <li><a href="/register">New Registration</a></li>
+                <li><a href="/register">Register</a></li>
                 <li><a href="/showUsers">All Users</a></li>
             </ul>
         </div>
@@ -85,41 +85,44 @@
         <div class="container text-center">
             <h3>New Registration</h3>
             <hr>
-            <form class="form-horizontal" method="POST" action="save_user">
+            <div id="error">
+                <h4 id="errorsDisplay"></h4>
+            </div>
+            <form id="register" class="form-horizontal" method="POST" action="save_user">
                 <input type="hidden" name="id" value="${user.id }"/>
                 <div class="form-group">
                     <label class="control-label col-md-3">Username</label>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" name="username"
-                               value="${user.username }"/>
+                        <input id="name" type="text" class="form-control"  name="username"
+                               value="${user.username }" required/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3">First Name</label>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" name="firstname"
-                               value="${user.firstname }"/>
+                        <input type="text" class="form-control" id="firstName1" name="firstname"
+                               value="${user.firstname } "required/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3">Last Name</label>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" name="lastname"
-                               value="${user.lastname }"/>
+                        <input type="text" class="form-control" id="lastName1" name="lastname"
+                               value="${user.lastname }" required/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3">Age </label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="age"
-                               value="${user.age }"/>
+                               value="${user.age }" required/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3">Password</label>
                     <div class="col-md-7">
-                        <input type="password" class="form-control" name="password"
-                               value="${user.password }"/>
+                        <input type="password" class="form-control" id="pass" name="password"
+                               value="${user.password }" required/>
                     </div>
                 </div>
                 <div class="form-group ">
@@ -167,7 +170,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3">Password</label>
                     <div class="col-md-7">
-                        <input type="password" class="form-control" name="password"
+                        <input type="password" class="form-control" id="password" name="password"
                                value="${user.password }"/>
                     </div>
                 </div>
@@ -183,7 +186,11 @@
             <h3>Update User</h3>
             <hr>
             <form class="form-horizontal" method="POST" action="loginUser">
-                <input type="hidden" name="id" value="${user.id }"/>
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger">
+                        <c:out value="${error}"></c:out>
+                    </div>
+                </c:if>
                 <div class="form-group">
                     <label class="control-label col-md-3">Username</label>
                     <div class="col-md-7">
@@ -211,5 +218,40 @@
 </c:choose>
 <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<%--<div><script src="js/script.js"></script></div>--%>
+<%--<script>const username = document.getElementById("name").value;--%>
+<%--const pass = document.getElementById("pass").value;--%>
+
+
+<%--const error = document.getElementById("errorsDisplay");--%>
+<%--const form = document.getElementById("register");--%>
+
+
+<%--form.addEventListener('submit', (e) => {--%>
+
+<%--    let message = [];--%>
+<%--    if (username.length < 6) {--%>
+<%--        message.push("Username must be longer than 6 characters");--%>
+<%--        console.log(message)--%>
+<%--        console.log( username);--%>
+
+<%--    }--%>
+<%--    // if( pass.length < 6){--%>
+<%--    //     message.push("Password must be longer than 6 characters");--%>
+<%--    // }--%>
+<%--    // if( pass.length>15){--%>
+<%--    //     message.push("Password must be shorter than 15 characters");--%>
+<%--    //--%>
+<%--    // }--%>
+
+<%--    if (message.length > 0) {--%>
+<%--        e.preventDefault()--%>
+<%--        error.innerText = message.join('\n');--%>
+<%--        console.log("stop")--%>
+<%--        console.log(message)--%>
+<%--    }--%>
+
+
+<%--})</script>--%>
 </body>
 </html>
